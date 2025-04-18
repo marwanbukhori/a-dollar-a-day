@@ -20,7 +20,13 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build:frontend": "cd frontend && npm install && npm run build",
     "build:full": "npm run build && npm run build:frontend",
-    "start:full": "npm run build:full && npm run start:prod"
+    "start:full": "npm run build:full && npm run start:prod",
+    "dev:backend": "NODE_OPTIONS='--experimental-specifier-resolution=node --no-warnings' nest start --watch",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "db:migrate": "typeorm migration:run",
+    "db:generate": "typeorm migration:generate",
+    "db:seed": "curl -X POST http://localhost:3000/api/products/seed"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -50,6 +56,7 @@
     "@types/supertest": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "concurrently": "^9.1.2",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",

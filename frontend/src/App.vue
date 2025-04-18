@@ -21,7 +21,7 @@ export default defineComponent({
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; {{ currentYear }} Shopee Affiliate Skincare Browser</p>
+        <p>&copy; {{ currentYear }} marwanbukhori.com</p>
       </div>
     </footer>
   </div>

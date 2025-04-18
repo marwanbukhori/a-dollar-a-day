@@ -21,7 +21,8 @@
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import ProductForm, { Product } from '../components/ProductForm.vue';
+import ProductForm from '../components/ProductForm.vue';
+import type { Product } from '../components/ProductForm.vue';
 
 export default defineComponent({
   name: 'ProductFormView',

@@ -26,14 +26,22 @@ export class ProductService {
   }
 
   async findByCategory(category: string): Promise<Product[]> {
-    return this.productRepository.find({ where: { category } });
+    return this.productRepository
+      .createQueryBuilder('product')
+      .where('LOWER(product.category) = LOWER(:category)', { category })
+      .getMany();
   }
 
   async findBySkinProblem(skinProblem: string): Promise<Product[]> {
-    return this.productRepository
-      .createQueryBuilder('product')
-      .where(':skinProblem = ANY(product.skinProblem)', { skinProblem })
-      .getMany();
+    // Get all products and filter in memory for the skin problem
+    const allProducts = await this.productRepository.find();
+    const normalizedSkinProblem = skinProblem.toLowerCase();
+
+    return allProducts.filter((product) =>
+      product.skinProblem.some(
+        (problem) => problem.toLowerCase() === normalizedSkinProblem,
+      ),
+    );
   }
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
@@ -53,6 +61,10 @@ export class ProductService {
   async remove(id: string): Promise<void> {
     const product = await this.findById(id);
     await this.productRepository.remove(product);
+  }
+
+  async deleteAll(): Promise<void> {
+    await this.productRepository.clear();
   }
 
   async importFromExcel(file: Express.Multer.File): Promise<Product[]> {

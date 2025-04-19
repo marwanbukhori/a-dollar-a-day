@@ -13,8 +13,8 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductService } from '../services/product.service';
 import { Product } from '../entities/product.entity';
-import { CreateProductDto } from '../dtos/create-product.dto';
-import { UpdateProductDto } from '../dtos/update-product.dto';
+import { CreateProductDto } from '../dto/create-product.dto';
+import { UpdateProductDto } from '../dto/update-product.dto';
 
 @Controller('products')
 export class ProductController {

@@ -6,6 +6,7 @@ import {
   Min,
   Max,
   ArrayMinSize,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateProductDto {
@@ -18,10 +19,11 @@ export class CreateProductDto {
   @IsString()
   category: string;
 
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
-  skinProblem: string[];
+  skinProblem?: string[];
 
   @IsNumber()
   @Min(0)

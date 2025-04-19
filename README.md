@@ -1,4 +1,3 @@
-
 ![image](https://github.com/user-attachments/assets/ef786988-6440-4701-a8c2-a26939009a4b)
 
 # Shopee Affiliate Platform
@@ -186,3 +185,108 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+# Product Management System: Excel Import/Export
+
+## Overview
+
+This module provides Excel import/export functionality for managing product data. It allows bulk operations (create/update) through familiar spreadsheet interfaces.
+
+## API Endpoints
+
+| Method | Endpoint                       | Description                |
+| ------ | ------------------------------ | -------------------------- |
+| `GET`  | `/api/products/excel/template` | Download empty template    |
+| `GET`  | `/api/products/excel/export`   | Export all products        |
+| `POST` | `/api/products/excel/import`   | Import products from Excel |
+
+## Quick Start
+
+### 1. Download Template
+
+```bash
+curl -X GET http://localhost:3000/api/products/excel/template -o template.xlsx
+```
+
+### 2. Fill Template with Product Data
+
+Open `template.xlsx` in Excel and:
+
+- Keep row 1 (headers) unchanged
+- Fill rows with product data (starting from row 3)
+- Save as .xlsx format
+
+Required fields:
+
+- Name
+- Category
+- Price
+- Rating
+- Sold
+- Image URL
+- Affiliate Link
+
+### 3. Import Products
+
+```bash
+curl -X POST http://localhost:3000/api/products/excel/import -F "file=@template.xlsx"
+```
+
+### 4. Export Current Products
+
+```bash
+curl -X GET http://localhost:3000/api/products/excel/export -o products.xlsx
+```
+
+## Data Structure
+
+| Column         | Data Type     | Required | Description                                        |
+| -------------- | ------------- | -------- | -------------------------------------------------- |
+| ID             | String (UUID) | \*       | Product unique identifier (auto-generated for new) |
+| Name           | String        | Yes      | Product name                                       |
+| Category       | String        | Yes      | Product category (e.g. Cleanser, Toner)            |
+| Brand          | String        | No       | Product brand name                                 |
+| Price          | Number        | Yes      | Product price                                      |
+| Rating         | Number        | Yes      | Product rating (0-5)                               |
+| Sold           | Number        | Yes      | Number of units sold                               |
+| Image URL      | URL           | Yes      | Product image link                                 |
+| Affiliate Link | URL           | Yes      | Product purchase link                              |
+| Skin Problems  | String        | No       | Comma-separated list of skin concerns              |
+| Description    | Text          | No       | Detailed product description                       |
+| Ingredients    | Text          | No       | List of ingredients                                |
+
+## Tips for Success
+
+1. **Creating vs Updating**:
+
+   - To create new products: Leave ID blank
+   - To update existing products: Use current product IDs
+
+2. **Special Fields**:
+
+   - Skin Problems: Use comma-separated values (e.g., "Acne,Dryness,Oily Skin")
+   - URLs: Include http:// or https://
+
+3. **Workflow Example**:
+
+   - Download current products (`/api/products/excel/export`)
+   - Make changes in Excel
+   - Import updated file (`/api/products/excel/import`)
+
+4. **Troubleshooting**:
+   - Verify all required fields are populated
+   - Check data format (numbers for numeric fields)
+   - Ensure file is saved as .xlsx format
+
+## Example Response
+
+Successful import:
+
+```json
+{
+  "status": "success",
+  "message": "Successfully imported 5 out of 5 products",
+  "total": 5,
+  "saved": 5
+}
+```

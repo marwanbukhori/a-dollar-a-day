@@ -20,6 +20,15 @@ export class Product {
   @Column({ type: 'varchar', length: 100 })
   category: string;
 
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  brand: string;
+
+  @Column({ type: 'text', nullable: true })
+  description: string;
+
+  @Column({ type: 'text', nullable: true })
+  ingredients: string;
+
   @Column('simple-array')
   skinProblem: string[];
 

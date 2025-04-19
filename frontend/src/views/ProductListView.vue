@@ -5,12 +5,12 @@
     <div class="actions-bar">
       <div class="search-filter">
         <input
+          v-model="searchQuery"
           type="text"
           placeholder="Search products..."
           class="search-input"
-          v-model="searchQuery"
         />
-        <select class="filter-select" v-model="selectedCategory">
+        <select v-model="selectedCategory" class="filter-select">
           <option value="">All Categories</option>
           <option value="Skincare">Skincare</option>
           <option value="Makeup">Makeup</option>
@@ -29,10 +29,10 @@
           <tr>
             <th>
               <input
+                v-model="selectAll"
                 type="checkbox"
                 class="select-all"
                 @change="toggleSelectAll"
-                v-model="selectAll"
               />
             </th>
             <th>Image</th>
@@ -48,7 +48,7 @@
         <tbody>
           <tr v-for="(product, index) in filteredProducts" :key="index">
             <td>
-              <input type="checkbox" v-model="selectedProducts[index]" />
+              <input v-model="selectedProducts[index]" type="checkbox" />
             </td>
             <td>
               <div

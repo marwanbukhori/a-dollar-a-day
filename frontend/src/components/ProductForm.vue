@@ -3,13 +3,13 @@
     <h2 class="form-title">
       {{ isEdit ? 'Edit Product' : 'Add New Product' }}
     </h2>
-    <form @submit.prevent="submitForm" class="product-form">
+    <form class="product-form" @submit.prevent="submitForm">
       <div class="form-group">
         <label for="name">Product Name</label>
         <input
-          type="text"
           id="name"
           v-model="formData.name"
+          type="text"
           required
           class="form-control"
         />
@@ -18,9 +18,9 @@
       <div class="form-group">
         <label for="sku">SKU</label>
         <input
-          type="text"
           id="sku"
           v-model="formData.sku"
+          type="text"
           required
           class="form-control"
         />
@@ -46,9 +46,9 @@
       <div class="form-group">
         <label for="price">Price</label>
         <input
-          type="number"
           id="price"
           v-model.number="formData.price"
+          type="number"
           required
           min="0.01"
           step="0.01"
@@ -59,9 +59,9 @@
       <div class="form-group">
         <label for="stock">Stock</label>
         <input
-          type="number"
           id="stock"
           v-model.number="formData.stock"
+          type="number"
           required
           min="0"
           class="form-control"
@@ -85,16 +85,16 @@
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
         <input
-          type="url"
           id="imageUrl"
           v-model="formData.imageUrl"
+          type="url"
           required
           class="form-control"
         />
       </div>
 
       <div class="form-buttons">
-        <button type="button" @click="cancel" class="cancel-btn">Cancel</button>
+        <button type="button" class="cancel-btn" @click="cancel">Cancel</button>
         <button type="submit" class="submit-btn">
           {{ isEdit ? 'Update' : 'Add' }} Product
         </button>

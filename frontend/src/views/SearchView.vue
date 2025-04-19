@@ -7,8 +7,8 @@
       </p>
       <div class="search-container">
         <input
-          type="text"
           v-model="searchQuery"
+          type="text"
           placeholder="Search for products, brands, or ingredients..."
           class="search-input"
           @keyup.enter="search"

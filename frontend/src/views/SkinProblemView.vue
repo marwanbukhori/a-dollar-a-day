@@ -18,9 +18,9 @@
             <h4>Search</h4>
             <div class="search-input">
               <input
+                v-model="searchQuery"
                 type="text"
                 placeholder="Search products..."
-                v-model="searchQuery"
                 @input="applyFilters"
               />
             </div>
@@ -30,17 +30,17 @@
             <h4>Price Range</h4>
             <div class="price-inputs">
               <input
+                v-model="priceMin"
                 type="number"
                 placeholder="Min"
-                v-model="priceMin"
                 min="0"
                 @change="applyFilters"
               />
               <span>-</span>
               <input
+                v-model="priceMax"
                 type="number"
                 placeholder="Max"
-                v-model="priceMax"
                 min="0"
                 @change="applyFilters"
               />
@@ -51,14 +51,14 @@
             <h4>Categories</h4>
             <div class="checkbox-group">
               <label
-                class="checkbox-item"
                 v-for="category in categories"
                 :key="category"
+                class="checkbox-item"
               >
                 <input
+                  v-model="selectedCategories"
                   type="checkbox"
                   :value="category"
-                  v-model="selectedCategories"
                   @change="applyFilters"
                 />
                 <span>{{ category }}</span>
@@ -71,30 +71,30 @@
             <div class="rating-filter">
               <label class="radio-item">
                 <input
+                  v-model="minRating"
                   type="radio"
                   name="rating"
                   :value="0"
-                  v-model="minRating"
                   @change="applyFilters"
                 />
                 <span>All Ratings</span>
               </label>
               <label class="radio-item">
                 <input
+                  v-model="minRating"
                   type="radio"
                   name="rating"
                   :value="4"
-                  v-model="minRating"
                   @change="applyFilters"
                 />
                 <span>4★ & Up</span>
               </label>
               <label class="radio-item">
                 <input
+                  v-model="minRating"
                   type="radio"
                   name="rating"
                   :value="4.5"
-                  v-model="minRating"
                   @change="applyFilters"
                 />
                 <span>4.5★ & Up</span>

@@ -8,9 +8,9 @@
       </p>
       <div class="search-box">
         <input
+          v-model="searchQuery"
           type="text"
           placeholder="Search for products, brands, or concerns..."
-          v-model="searchQuery"
           @keyup.enter="search"
         />
         <button @click="search">Search</button>
@@ -212,8 +212,8 @@
     </section>
 
     <section
-      class="featured-products section-container"
       v-if="featuredProducts.length > 0"
+      class="featured-products section-container"
     >
       <h2>Top Rated Products</h2>
       <div class="product-grid">
